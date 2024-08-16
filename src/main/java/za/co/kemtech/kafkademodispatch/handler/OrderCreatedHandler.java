@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import za.co.kemtech.kafkademodispatch.model.Order;
 import za.co.kemtech.kafkademodispatch.service.DispatchService;
 
 @Slf4j
@@ -19,7 +20,7 @@ public class OrderCreatedHandler {
             groupId = "dispatch.order.created.consumer",
             topics = "order.created"
     )
-    public void listen(String payload){
+    public void listen(Order payload){
         dispatchService.process(payload);
         log.info("Message consumed : payload " + payload);
     }
