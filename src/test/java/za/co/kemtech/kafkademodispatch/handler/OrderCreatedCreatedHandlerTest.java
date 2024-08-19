@@ -2,16 +2,15 @@ package za.co.kemtech.kafkademodispatch.handler;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import za.co.kemtech.kafkademodispatch.model.Order;
+import za.co.kemtech.kafkademodispatch.model.OrderCreated;
 import za.co.kemtech.kafkademodispatch.service.DispatchService;
 import za.co.kemtech.kafkademodispatch.util.TestEventData;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class OrderCreatedHandlerTest {
+class OrderCreatedCreatedHandlerTest {
 
     private OrderCreatedHandler handler;
     private DispatchService dispatchServiceMock;
@@ -23,9 +22,11 @@ class OrderCreatedHandlerTest {
     }
 
     @Test
-    void listen(){
-        Order eventData = TestEventData.buildOrderEvent(UUID.randomUUID(), UUID.randomUUID().toString());
+    void listen_Success() throws Exception {
+        OrderCreated eventData = TestEventData.buildOrderEvent(UUID.randomUUID(), UUID.randomUUID().toString());
         handler.listen(eventData);
         verify(dispatchServiceMock, times(1)).process(eventData);
     }
+
+
 }
